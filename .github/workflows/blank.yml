@@ -1,4 +1,4 @@
-name: Tz
+name: Build Soko Letu Tz APK
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build-apk:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,11 +17,11 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'
+          flutter-version: '3.19.0'
           channel: 'stable'
           cache: true
 
-      - name: Flutter version
+      - name: Check Flutter version
         run: flutter --version
 
       - name: Get dependencies
@@ -30,14 +30,8 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Check APK
-        run: |
-          echo "APK files found:"
-          find build/app/outputs/flutter-apk -type f -name "*.apk" -print
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Soko-Letu-Tz-APK
+          name: soko-letu-tz-apk
           path: build/app/outputs/flutter-apk/app-release.apk
-          if-no-files-found: error
