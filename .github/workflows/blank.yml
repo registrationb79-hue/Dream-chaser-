@@ -1,4 +1,4 @@
-name: Build Soko Letu Tz APK
+name: Build Flutter APK
 
 on:
   workflow_dispatch:
@@ -17,12 +17,15 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'
+          flutter-version: '3.35.0'
           channel: 'stable'
           cache: true
 
-      - name: Check Flutter version
-        run: flutter --version
+      - name: Check Flutter project
+        run: |
+          pwd
+          ls -la
+          test -f pubspec.yaml
 
       - name: Get dependencies
         run: flutter pub get
