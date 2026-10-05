@@ -17,14 +17,22 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.0'
+          flutter-version: '3.47.0'
           channel: 'stable'
           cache: true
 
+      - name: Show Flutter and Dart versions
+        run: |
+          flutter --version
+          dart --version
+
       - name: Check Flutter project
         run: |
+          echo "Current directory:"
           pwd
+          echo "Project files:"
           ls -la
+          echo "Checking pubspec.yaml..."
           test -f pubspec.yaml
 
       - name: Get dependencies
